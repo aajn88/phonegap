@@ -16,6 +16,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
+	
+	private int currentFragment;
 
 	@SuppressLint("UseSparseArrays")
 	private final Map<Integer, Fragment> fragments = new HashMap<Integer, Fragment>();
@@ -66,11 +68,12 @@ public class MainActivity extends ActionBarActivity {
 		
 		Fragment pageFragment = getFragment(pageId);
 		if(pageFragment == null) {
-			Toast.makeText(this, "Error changing page", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "Error while changing page", Toast.LENGTH_SHORT).show();
 		} else {
 			removeFragments();
 			pageFragment.setArguments(extras);
 			getSupportFragmentManager().beginTransaction().add(R.id.container, pageFragment).commit();
+			currentFragment = pageId;
 		}
 	}
 
@@ -107,6 +110,15 @@ public class MainActivity extends ActionBarActivity {
 		}
 		
 		return  result;
+	}
+	
+	@Override
+	public void onBackPressed() {
+		if(currentFragment == R.layout.fragment_main) {
+			super.onBackPressed();
+		} else if(currentFragment == R.layout.employee_detail) {
+			changePage(R.layout.fragment_main, new Bundle());
+		}
 	}
 
 }

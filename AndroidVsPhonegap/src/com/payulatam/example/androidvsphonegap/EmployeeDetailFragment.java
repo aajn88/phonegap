@@ -1,6 +1,10 @@
 package com.payulatam.example.androidvsphonegap;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -20,19 +24,43 @@ public class EmployeeDetailFragment extends Fragment {
 	private Bundle extras;
 	private Employee selectedEmployee;
 	private EmployeeDAO employeeDAO = new EmployeeDAO();
-	
+
 	private ImageView mEmployeeIv;
 	private TextView mEmployeeNameTv;
 	private TextView mEmployeeEmailTv;
+	private TextView mEmployeeLocationTv;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 		View rootView = inflater.inflate(R.layout.employee_detail, container, false);
-		
-		mEmployeeIv = (ImageView)rootView.findViewById(R.id.employeeImageView);
+
+		mEmployeeIv = (ImageView) rootView.findViewById(R.id.employeeImageView);
 		mEmployeeNameTv = (TextView) rootView.findViewById(R.id.detailNameTv);
 		mEmployeeEmailTv = (TextView) rootView.findViewById(R.id.detailEmailTv);
+		mEmployeeLocationTv = (TextView) rootView.findViewById(R.id.locationTv);
+		
+		Button addLocationButton = (Button) rootView.findViewById(R.id.addLocationButton);
+		addLocationButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+				
+				Criteria criteria = new Criteria();
+				String provider = locationManager.getBestProvider(criteria, false);
+				Location location = locationManager.getLastKnownLocation(provider);
+				
+				String message;
+				
+				if(location != null) {
+					message = location.getLatitude() + ", " + location.getLongitude();
+				} else {
+					message = "Location cannot be reached!";
+				}
+				
+				mEmployeeLocationTv.setText(message);
+			}
+		});
 		
 		Button backButton = (Button) rootView.findViewById(R.id.backButton);
 		backButton.setOnClickListener(new OnClickListener() {
@@ -72,5 +100,5 @@ public class EmployeeDetailFragment extends Fragment {
 		i.putExtra(BroadcastMessages.PAGE_ID_KEY, R.layout.fragment_main);
 		getActivity().sendBroadcast(i);
 	}
-
+	
 }

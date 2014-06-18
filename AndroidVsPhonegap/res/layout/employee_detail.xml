@@ -15,26 +15,45 @@
         android:id="@+id/detailNameTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/employeeImageView"
-        android:text="Hello World!"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="detailNameTv"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/detailEmailTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignLeft="@+id/detailNameTv"
         android:layout_below="@+id/detailNameTv"
-        android:text="Medium Text"
+        android:text="detailEmailTv"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/locationTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/detailEmailTv"
+        android:layout_below="@+id/detailEmailTv"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/addLocationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/locationTv"
+        android:layout_marginTop="18dp"
+        android:text="@string/add_location" />
 
     <Button
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/detailEmailTv"
+        android:layout_alignRight="@+id/addLocationButton"
+        android:layout_below="@+id/addLocationButton"
+        android:layout_marginTop="18dp"
         android:text="@string/back" />
 
 </RelativeLayout>
