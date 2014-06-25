@@ -1,4 +1,4 @@
-Author: Eng. Antonio Jimenez
+Author: Eng. Antonio Jimenez (antonio.jimenez@payulatam.com)
 
 Phonegap Vs. Android
 
